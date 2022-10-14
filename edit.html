@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>选手查询</title>
+  <link rel="stylesheet" href="./bootstrap/index.css">
+</head>
+
+<body>
+  <!-- 获取当前url的username，请求数据之后将数据回填到内容去，如果没有username或者找不到对应用户，不会填 -->
+  <div class="container p-5">
+    <h3 class="text-center mb-5">xxx查询系统</h3>
+    <form class="row needs-validation" novalidate>
+      <div class="row mb-3">
+        <input type="text" class="form-control" id="xuanshouming" placeholder="选手名">
+      </div>
+      <div class="row mb-3">
+        <input type="text" class="form-control" id="xuanshouhao" placeholder="选手号">
+      </div>
+      <div class="row mb-3">
+        <button type="submit" class="btn btn-primary">查询</button>
+      </div>
+    </form>
+  </div>
+  <script src="./bootstrap/index.js"></script>
+</body>
+
+</html>

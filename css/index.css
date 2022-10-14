@@ -1,0 +1,58 @@
+.bg {
+  background: linear-gradient(to right, #a5bbe6, #6c98e9);
+  height: 170px;
+  text-align: center;
+  padding-top: 40px;
+}
+
+.content {
+  height: 100vh;
+  width: 100vw;
+}
+
+.searchBox {
+  background: #fff;
+  margin: -40px 20px 60px;
+  padding: 16px;
+  border-radius: 20px;
+  box-shadow: #999 0 0 20px;
+}
+
+.searchBox .row {
+  --bs-gutter-x: 0;
+}
+
+.searchBox .btn-custom {
+  background: #6b97e9;
+  color: #fff;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.searchBox .title {
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.searchBox .line {
+  width: 30px;
+  height: 4px;
+  background-color: #007aff;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  border-radius: 2px;
+}
+
+.qrcode {
+  text-align: center;
+}
+
+.searchBox .form-control {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+  box-shadow: none !important;
+}

@@ -1,0 +1,146 @@
+.bg {
+  /* background: url('../img/圆弧底图.png'); */
+  /* background: linear-gradient(to right, #a5bbe6, #6c98e9); */
+  height: 170px;
+  text-align: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.content {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  opacity: 0;
+}
+
+.header {
+  text-align: center;
+  color: #fff;
+  padding: 40px 0;
+}
+
+.game-name {
+  font-size: 14px;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.searchBox {
+  background: #fff;
+  margin: 0 20px;
+  padding: 16px;
+  border-radius: 20px;
+  box-shadow: #eee 0 0 20px;
+  color: #535a6c;
+}
+
+.searchBox .row {
+  --bs-gutter-x: 0;
+}
+
+.searchBox .btn-custom {
+  background: #6b97e9;
+  color: #fff;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.searchBox .title {
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.searchBox .line {
+  width: 30px;
+  height: 4px;
+  background-color: #007aff;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  border-radius: 2px;
+}
+
+.search-result-item {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.search-result-item:last-child {
+  margin-bottom: 0px;
+}
+
+.tips {
+  background: #fff;
+  padding: 10px;
+  box-shadow: #eee 0 0 20px;
+  color: #2f3b4b;
+  font-size: 14px;
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.tips .label {
+  color: #535a6c;
+  margin-right: 10px;
+}
+.tips .value {
+  color: #2a57ff;
+}
+
+footer {
+  padding: 24px;
+}
+
+footer div {
+  width: 66%;
+  margin: 0 auto;
+}
+
+footer div img {
+  display: block;
+}
+
+.score-box {
+  background: #fff;
+  padding: 20px;
+  box-shadow: #eee 0 0 20px;
+  color: #2f3b4b;
+}
+
+.score-box .title {
+  text-align: center;
+  font-size: 16px;
+}
+
+.score-box .score-list {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.score-box .score-item {
+  color: #8d99b7;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #eee;
+  min-width: 100px;
+}
+
+.score-box .score-item .score {
+  font-size: 20px;
+}
+.score-box .score-item .score-name {
+  font-size: 12px;
+}
+
+.score-box .desc {
+  font-size: 12px;
+}

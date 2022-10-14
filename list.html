@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>查询结果</title>
+    <link rel="stylesheet" href="./bootstrap/index.css" />
+  </head>
+  <style>
+    .col-form-label {
+      text-align: right;
+    }
+  </style>
+  <body>
+    <div class="container p-5" style="min-width: 1200px">
+      <h4 class="text-center mb-5">xxx查询系统</h4>
+      <div class="mb-2">
+        <button class="btn btn-primary btn-sm" onclick="doEdit(0)">添加</button>
+        <button class="btn btn-primary btn-sm">批量添加</button>
+      </div>
+      <table class="table table-hover table-striped table-bordered">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">选手姓名</th>
+            <th scope="col">选手编号</th>
+            <th scope="col">所在组别</th>
+            <th scope="col">选送机构</th>
+            <th scope="col">所获奖项</th>
+            <th scope="col">是否晋级</th>
+            <th scope="col">作品完成度分数</th>
+            <th scope="col">艺术表现力分数</th>
+            <th scope="col">总分</th>
+            <th scope="col">操作</th>
+          </tr>
+        </thead>
+        <tbody class="tbody"></tbody>
+      </table>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">添加/编辑</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form class="row" id="formId">
+              <div class="mb-3 row">
+                <label for="xsxm" class="col-sm-4 col-form-label"
+                  >选手姓名</label
+                >
+                <div class="col-sm-8">
+                  <input
+                    id="id"
+                    name="id"
+                    hidden
+                    type="text"
+                    class="form-control"
+                  />
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="xsxm"
+                    name="xsxm"
+                  />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="xsbh" class="col-sm-4 col-form-label"
+                  >选手编号</label
+                >
+                <div class="col-sm-8">
+                  <input class="form-control" id="xsbh" name="xsbh" />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="szzb" class="col-sm-4 col-form-label"
+                  >所在组别</label
+                >
+                <div class="col-sm-8">
+                  <input class="form-control" id="szzb" name="szzb" />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="xsjg" class="col-sm-4 col-form-label"
+                  >选送机构</label
+                >
+                <div class="col-sm-8">
+                  <input class="form-control" id="xsjg" name="xsjg" />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="shjx" class="col-sm-4 col-form-label"
+                  >所获奖项</label
+                >
+                <div class="col-sm-8">
+                  <input class="form-control" id="shjx" name="shjx" />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="sfjj" class="col-sm-4 col-form-label"
+                  >是否晋级</label
+                >
+                <div class="col-sm-8">
+                  <input class="form-control" id="sfjj" name="sfjj" />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="wcfs" class="col-sm-4 col-form-label"
+                  >作品完成度分数</label
+                >
+                <div class="col-sm-8">
+                  <input class="form-control" id="wcfs" name="wcfs" />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="bxfs" class="col-sm-4 col-form-label"
+                  >艺术表现力分数</label
+                >
+                <div class="col-sm-8">
+                  <input class="form-control" id="bxfs" name="bxfs" />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="zfs" class="col-sm-4 col-form-label">总分</label>
+                <div class="col-sm-8">
+                  <input class="form-control" id="zfs" name="zfs" />
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              取消
+            </button>
+            <button type="button" class="btn btn-primary" onclick="submit()">
+              确认
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+    <script src="./bootstrap/index.js"></script>
+    <script src="./js/config.js"></script>
+    <script>
+      function getData() {
+        const data = [
+          {
+            id: "1",
+            xsxm: "选手姓名",
+            xsbh: "选手编号",
+            szzb: "所在组别",
+            xsjg: "选送机构",
+            shjx: "所获奖项",
+            sfjj: "是否晋级",
+            wcfs: "作品完成度分数",
+            bxfs: "艺术表现力分数",
+            zfs: "总分",
+          },
+          {
+            id: "2",
+            xsxm: "选手姓名",
+            xsbh: "选手编号",
+            szzb: "所在组别",
+            xsjg: "选送机构",
+            shjx: "所获奖项",
+            sfjj: "是否晋级",
+            wcfs: "作品完成度分数",
+            bxfs: "艺术表现力分数",
+            zfs: "总分",
+          },
+        ];
+        $(".tbody").html(
+          data.map((item) => {
+            const str = JSON.stringify(item);
+            return `<tr>
+              <th scope="row">${item.id}</th>
+              <td>${item.xsxm}</td>
+              <td>${item.xsbh}</td>
+              <td>${item.szzb}</td>
+              <td>${item.xsjg}</td>
+              <td>${item.shjx}</td>
+              <td>${item.sfjj}</td>
+              <td>${item.wcfs}</td>
+              <td>${item.bxfs}</td>
+              <td>${item.zfs}</td>
+              <td>
+                <button type="button" class="btn btn-primary btn-sm" onclick='doEdit(1, ${str})'>编辑</button>
+                <button class="btn btn-danger btn-sm" onclick="doDel(${item.id})">删除</button>
+              </td>
+            </tr>`;
+          })
+        );
+      }
+
+      function doEdit(editKey, data) {
+        if (editKey === 0) {
+          $(`.form-control`).val("");
+        } else {
+          Object.keys(data).forEach((item) => {
+            $(`#${item}`).val(data[item]);
+          });
+        }
+        $("#exampleModal").modal("show");
+      }
+
+      function doDel(id) {
+        console.log(id);
+        $.ajax({
+          url: `${serverUrl}/index.php`,
+          data: values,
+          method: "del",
+          success: (data) => {
+            getData();
+          },
+        });
+      }
+      
+      function submit() {
+        const values = getParameter($(".form-control"));
+        $.ajax({
+          url: `${serverUrl}/index.php`,
+          data: values,
+          method: "post",
+          success: (data) => {
+            $("#exampleModal").modal("hide");
+
+            getData();
+          },
+        });
+      }
+
+      $(() => {
+        getData();
+      });
+    </script>
+  </body>
+</html>
