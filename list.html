@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>查询结果</title>
+    <link rel="stylesheet" href="//unpkg.com/layui@2.6.8/dist/css/layui.css" />
     <link rel="stylesheet" href="./bootstrap/index.css" />
   </head>
   <style>
@@ -17,12 +18,13 @@
       <h4 class="text-center mb-5">xxx查询系统</h4>
       <div class="mb-2">
         <button class="btn btn-primary btn-sm" onclick="doEdit(0)">添加</button>
-        <button class="btn btn-primary btn-sm">批量添加</button>
+        <button class="btn btn-primary btn-sm" onclick="onMul()">
+          批量添加
+        </button>
       </div>
       <table class="table table-hover table-striped table-bordered">
         <thead>
           <tr>
-            <th scope="col"></th>
             <th scope="col">选手姓名</th>
             <th scope="col">选手编号</th>
             <th scope="col">所在组别</th>
@@ -37,7 +39,7 @@
         </thead>
         <tbody class="tbody"></tbody>
       </table>
-      <nav aria-label="Page navigation example">
+      <!-- <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-end">
           <li class="page-item">
             <a class="page-link" href="#" aria-label="Previous">
@@ -53,12 +55,12 @@
             </a>
           </li>
         </ul>
-      </nav>
+      </nav> -->
     </div>
 
     <div
       class="modal fade"
-      id="exampleModal"
+      id="addModal"
       tabindex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
@@ -66,7 +68,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">添加/编辑</h5>
+            <h5 class="modal-title" id="exampleModalLabel">添加</h5>
             <button
               type="button"
               class="btn-close"
@@ -82,16 +84,8 @@
                 >
                 <div class="col-sm-8">
                   <input
-                    id="id"
-                    name="id"
-                    hidden
                     type="text"
-                    class="form-control"
-                  />
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="xsxm"
+                    class="form-control form-control-add"
                     name="xsxm"
                   />
                 </div>
@@ -101,7 +95,15 @@
                   >选手编号</label
                 >
                 <div class="col-sm-8">
-                  <input class="form-control" id="xsbh" name="xsbh" />
+                  <input class="form-control form-control-add" name="xsbh" />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="csjm" class="col-sm-4 col-form-label"
+                  >参赛节目</label
+                >
+                <div class="col-sm-8">
+                  <input class="form-control form-control-add" name="csjm" />
                 </div>
               </div>
               <div class="mb-3 row">
@@ -109,7 +111,7 @@
                   >所在组别</label
                 >
                 <div class="col-sm-8">
-                  <input class="form-control" id="szzb" name="szzb" />
+                  <input class="form-control form-control-add" name="szzb" />
                 </div>
               </div>
               <div class="mb-3 row">
@@ -117,7 +119,7 @@
                   >选送机构</label
                 >
                 <div class="col-sm-8">
-                  <input class="form-control" id="xsjg" name="xsjg" />
+                  <input class="form-control form-control-add" name="xsjg" />
                 </div>
               </div>
               <div class="mb-3 row">
@@ -125,7 +127,7 @@
                   >所获奖项</label
                 >
                 <div class="col-sm-8">
-                  <input class="form-control" id="shjx" name="shjx" />
+                  <input class="form-control form-control-add" name="shjx" />
                 </div>
               </div>
               <div class="mb-3 row">
@@ -133,7 +135,7 @@
                   >是否晋级</label
                 >
                 <div class="col-sm-8">
-                  <input class="form-control" id="sfjj" name="sfjj" />
+                  <input class="form-control form-control-add" name="sfjj" />
                 </div>
               </div>
               <div class="mb-3 row">
@@ -141,7 +143,7 @@
                   >作品完成度分数</label
                 >
                 <div class="col-sm-8">
-                  <input class="form-control" id="wcfs" name="wcfs" />
+                  <input class="form-control form-control-add" name="wcfs" />
                 </div>
               </div>
               <div class="mb-3 row">
@@ -149,13 +151,13 @@
                   >艺术表现力分数</label
                 >
                 <div class="col-sm-8">
-                  <input class="form-control" id="bxfs" name="bxfs" />
+                  <input class="form-control form-control-add" name="bxfs" />
                 </div>
               </div>
               <div class="mb-3 row">
                 <label for="zfs" class="col-sm-4 col-form-label">总分</label>
                 <div class="col-sm-8">
-                  <input class="form-control" id="zfs" name="zfs" />
+                  <input class="form-control form-control-add" name="zfs" />
                 </div>
               </div>
             </form>
@@ -168,7 +170,7 @@
             >
               取消
             </button>
-            <button type="button" class="btn btn-primary" onclick="submit()">
+            <button type="button" class="btn btn-primary" onclick="onAdd()">
               确认
             </button>
           </div>
@@ -176,100 +178,349 @@
       </div>
     </div>
 
-    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <div
+      class="modal fade"
+      id="modModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">编辑</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form class="row" id="formId">
+              <div class="mb-3 row">
+                <label for="xsxm" class="col-sm-4 col-form-label"
+                  >选手姓名</label
+                >
+                <div class="col-sm-8">
+                  <input
+                    type="text"
+                    class="form-control form-control-mod"
+                    id="xsxm"
+                    name="xsxm"
+                  />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="xsbh" class="col-sm-4 col-form-label"
+                  >选手编号</label
+                >
+                <div class="col-sm-8">
+                  <input
+                    class="form-control form-control-mod"
+                    id="xsbh"
+                    name="xsbh"
+                  />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="csjm" class="col-sm-4 col-form-label"
+                  >参赛节目</label
+                >
+                <div class="col-sm-8">
+                  <input
+                    class="form-control form-control-mod"
+                    id="csjm"
+                    name="csjm"
+                  />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="szzb" class="col-sm-4 col-form-label"
+                  >所在组别</label
+                >
+                <div class="col-sm-8">
+                  <input
+                    class="form-control form-control-mod"
+                    id="szzb"
+                    name="szzb"
+                  />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="xsjg" class="col-sm-4 col-form-label"
+                  >选送机构</label
+                >
+                <div class="col-sm-8">
+                  <input
+                    class="form-control form-control-mod"
+                    id="xsjg"
+                    name="xsjg"
+                  />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="shjx" class="col-sm-4 col-form-label"
+                  >所获奖项</label
+                >
+                <div class="col-sm-8">
+                  <input
+                    class="form-control form-control-mod"
+                    id="shjx"
+                    name="shjx"
+                  />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="sfjj" class="col-sm-4 col-form-label"
+                  >是否晋级</label
+                >
+                <div class="col-sm-8">
+                  <input
+                    class="form-control form-control-mod"
+                    id="sfjj"
+                    name="sfjj"
+                  />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="wcfs" class="col-sm-4 col-form-label"
+                  >作品完成度分数</label
+                >
+                <div class="col-sm-8">
+                  <input
+                    class="form-control form-control-mod"
+                    id="wcfs"
+                    name="wcfs"
+                  />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="bxfs" class="col-sm-4 col-form-label"
+                  >艺术表现力分数</label
+                >
+                <div class="col-sm-8">
+                  <input
+                    class="form-control form-control-mod"
+                    id="bxfs"
+                    name="bxfs"
+                  />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="zfs" class="col-sm-4 col-form-label">总分</label>
+                <div class="col-sm-8">
+                  <input
+                    class="form-control form-control-mod"
+                    id="zfs"
+                    name="zfs"
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              取消
+            </button>
+            <button type="button" class="btn btn-primary" onclick="onMod()">
+              确认
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <div
+      class="modal fade"
+      id="fileModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">批量上传</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div
+              class="layui-upload-drag"
+              id="fileUpload"
+              style="display: block"
+            >
+              <i class="layui-icon"></i>
+              <p>点击上传，或将文件拖拽到此处</p>
+              <div class="layui-hide" id="uploadDemoView">
+                <hr />
+                <img src="" alt="上传成功后渲染" style="max-width: 196px" />
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              取消
+            </button>
+            <button type="button" class="btn btn-primary" onclick="onUpload()">
+              确认
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- http://layui.org.cn/demo/upload.html -->
+
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="//unpkg.com/layui@2.6.8/dist/layui.js"></script>
     <script src="./bootstrap/index.js"></script>
     <script src="./js/config.js"></script>
     <script>
       function getData() {
-        const data = [
-          {
-            id: "1",
-            xsxm: "选手姓名",
-            xsbh: "选手编号",
-            szzb: "所在组别",
-            xsjg: "选送机构",
-            shjx: "所获奖项",
-            sfjj: "是否晋级",
-            wcfs: "作品完成度分数",
-            bxfs: "艺术表现力分数",
-            zfs: "总分",
+        console.log(123);
+        $.ajax({
+          method: "get",
+          url: `${serverUrl}/index.php`,
+          data: {
+            type: "admin",
+            lx: "list",
           },
-          {
-            id: "2",
-            xsxm: "选手姓名",
-            xsbh: "选手编号",
-            szzb: "所在组别",
-            xsjg: "选送机构",
-            shjx: "所获奖项",
-            sfjj: "是否晋级",
-            wcfs: "作品完成度分数",
-            bxfs: "艺术表现力分数",
-            zfs: "总分",
+          success: (res) => {
+            if (res.code !== 1) {
+              $(".tbody").html(
+                '<tr><td colspan="10" style="text-align: center;height: 100px;line-height: 100px">无数据</td></tr>'
+              );
+            } else {
+              const data = res.msg;
+              $(".tbody").html(
+                data.map((item) => {
+                  const str = JSON.stringify(item);
+                  return `<tr>
+                    <td>${item.xsxm}</td>
+                    <td>${item.xsbh}</td>
+                    <td>${item.szzb}</td>
+                    <td>${item.xsjg}</td>
+                    <td>${item.shjx}</td>
+                    <td>${item.sfjj}</td>
+                    <td>${item.wcfs}</td>
+                    <td>${item.bxfs}</td>
+                    <td>${item.zfs}</td>
+                    <td>
+                      <button type="button" class="btn btn-primary btn-sm" onclick='doEdit(1, ${str})'>编辑</button>
+                      <button class="btn btn-danger btn-sm" onclick="doDel(${item.xsxm}, ${item.xsbh})">删除</button>
+                    </td>
+                  </tr>`;
+                })
+              );
+            }
           },
-        ];
-        $(".tbody").html(
-          data.map((item) => {
-            const str = JSON.stringify(item);
-            return `<tr>
-              <th scope="row">${item.id}</th>
-              <td>${item.xsxm}</td>
-              <td>${item.xsbh}</td>
-              <td>${item.szzb}</td>
-              <td>${item.xsjg}</td>
-              <td>${item.shjx}</td>
-              <td>${item.sfjj}</td>
-              <td>${item.wcfs}</td>
-              <td>${item.bxfs}</td>
-              <td>${item.zfs}</td>
-              <td>
-                <button type="button" class="btn btn-primary btn-sm" onclick='doEdit(1, ${str})'>编辑</button>
-                <button class="btn btn-danger btn-sm" onclick="doDel(${item.id})">删除</button>
-              </td>
-            </tr>`;
-          })
-        );
+        });
       }
 
       function doEdit(editKey, data) {
         if (editKey === 0) {
           $(`.form-control`).val("");
+          $("#addModal").modal("show");
         } else {
           Object.keys(data).forEach((item) => {
             $(`#${item}`).val(data[item]);
           });
+          $("#modModal").modal("show");
         }
-        $("#exampleModal").modal("show");
       }
 
-      function doDel(id) {
-        console.log(id);
+      function doDel(xsxm, xsbh) {
         $.ajax({
           url: `${serverUrl}/index.php`,
-          data: values,
-          method: "del",
+          data: {
+            type: "admin",
+            lx: "del",
+            xsxm,
+            xsbh,
+          },
+          method: "get",
           success: (data) => {
             getData();
           },
         });
       }
-      
-      function submit() {
-        const values = getParameter($(".form-control"));
+
+      function onAdd() {
+        const values = getParameter($(".form-control-add"));
+        console.log(values);
         $.ajax({
           url: `${serverUrl}/index.php`,
-          data: values,
+          data: {
+            type: "admin",
+            lx: "add",
+            ...values,
+          },
           method: "post",
           success: (data) => {
-            $("#exampleModal").modal("hide");
-
+            $("#addModal").modal("hide");
             getData();
           },
         });
       }
 
+      function onMod() {
+        const values = getParameter($(".form-control-mod"));
+        console.log(values);
+        $.ajax({
+          url: `${serverUrl}/index.php`,
+          data: {
+            type: "admin",
+            lx: "mod",
+            ...values,
+          },
+          method: "post",
+          success: (data) => {
+            $("#modModal").modal("hide");
+
+            getData();
+          },
+        });
+      }
+      function onMul() {
+        $("#fileModal").modal("show");
+      }
+      function onUpload() {}
       $(() => {
         getData();
+      });
+    </script>
+
+    <script>
+      layui.use("upload", function () {
+        var upload = layui.upload;
+        upload.render({
+          elem: "#fileUpload",
+          accept: 'file',
+          // url: "https://httpbin.org/post", //此处用的是第三方的 http 请求演示，实际使用时改成您自己的上传接口即可。
+          auto: false,
+          done: function (res) {
+            layer.msg("上传成功");
+            layui
+              .$("#uploadDemoView")
+              .removeClass("layui-hide")
+              .find("img")
+              .attr("src", res.files.file);
+            console.log(res);
+          },
+        });
       });
     </script>
   </body>
