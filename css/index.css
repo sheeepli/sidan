@@ -1,6 +1,6 @@
 .bg {
   background: linear-gradient(to right, #a5bbe6, #6c98e9);
-  height: 170px;
+  height: 200px;
   text-align: center;
   padding-top: 40px;
 }
@@ -20,20 +20,22 @@
 
 .searchBox .row {
   --bs-gutter-x: 0;
+  --bs-gutter-y: 4;
 }
 
 .searchBox .btn-custom {
-  background: #6b97e9;
-  color: #fff;
+  background: #6b97e9 !important;
+  color: #fff !important;
   font-size: 16px;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .searchBox .title {
   font-size: 18px;
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   font-weight: 500;
+  color: #505050;
 }
 
 .searchBox .line {
@@ -41,7 +43,7 @@
   height: 4px;
   background-color: #007aff;
   margin: 0 auto;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   border-radius: 2px;
 }
 
@@ -55,4 +57,9 @@
   border-right: none;
   border-radius: 0;
   box-shadow: none !important;
+}
+
+.holder {
+  color: #959595;
+  font-size: 12px;
 }
