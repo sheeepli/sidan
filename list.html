@@ -13,14 +13,42 @@
       text-align: right;
     }
   </style>
-  <body style="font-size: 14px;">
-    <div class="container p-5" style="min-width: 1400px;max-width: 100%;">
+  <body style="font-size: 14px">
+    <div class="container p-5" style="min-width: 1400px; max-width: 100%">
       <h4 class="text-center mb-5">xxx查询系统</h4>
-      <div class="mb-2">
-        <button class="btn btn-primary btn-sm" onclick="doEdit(0)">添加</button>
-        <button class="btn btn-primary btn-sm" onclick="onMul()">
-          批量添加
-        </button>
+      <div class="mb-2" style="display: flex; justify-content: space-between">
+        <div>
+          <button class="btn btn-primary btn-sm" onclick="doEdit(0)">
+            添加
+          </button>
+          <button class="btn btn-primary btn-sm" onclick="onMul()">
+            批量添加
+          </button>
+          <button class="btn btn-danger btn-sm" onclick="onAllDel()">
+            全部删除
+          </button>
+        </div>
+        <div>
+          <div style="width: 200px; display: flex">
+            <div style="margin-right: 4px">
+              <input
+                type="text"
+                class="form-control"
+                style="padding: 0.18rem 0.75rem"
+                name="key"
+                id="key"
+                placeholder="搜索"
+              />
+            </div>
+            <button
+              class="btn btn-primary btn-sm"
+              style="width: 100px"
+              onclick="onSearch()"
+            >
+              搜索
+            </button>
+          </div>
+        </div>
       </div>
       <table class="table table-hover table-striped table-bordered">
         <thead>
@@ -40,10 +68,6 @@
         </thead>
         <tbody class="tbody"></tbody>
       </table>
-      <!-- <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-end"><li class="page-item">  <a class="page-link" href="#" aria-label="Previous">    <span aria-hidden="true">&laquo;</span>  </a></li><li class="page-item"><a class="page-link" href="#">1</a></li><li class="page-item"><a class="page-link" href="#">2</a></li><li class="page-item"><a class="page-link" href="#">3</a></li><li class="page-item">  <a class="page-link" href="#" aria-label="Next">    <span aria-hidden="true">&raquo;</span>  </a></li>
-        </ul>
-      </nav> -->
     </div>
 
     <div
@@ -371,32 +395,23 @@
         </div>
       </div>
     </div>
-    <!-- http://layui.org.cn/demo/upload.html -->
 
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="//unpkg.com/layui@2.6.8/dist/layui.js"></script>
     <script src="./bootstrap/index.js"></script>
     <script src="./js/config.js"></script>
     <script>
-      function getData() {
-        $.ajax({
-          method: "get",
-          url: `${serverUrl}/index.php`,
-          data: {
-            type: "admin",
-            lx: "list",
-          },
-          success: (res) => {
-            if (res.code !== 1) {
-              $(".tbody").html(
-                '<tr><td colspan="10" style="text-align: center;height: 100px;line-height: 100px">无数据</td></tr>'
-              );
-            } else {
-              const data = res.msg;
-              $(".tbody").html(
-                data.map((item) => {
-                  const str = JSON.stringify(item);
-                  return `<tr>
+      function renderBody(res) {
+        if (res.code !== 1 || !res.msg || res.msg.length == 0) {
+          $(".tbody").html(
+            '<tr><td colspan="11" style="text-align: center;height: 100px;line-height: 100px">无数据</td></tr>'
+          );
+        } else {
+          const data = res.msg;
+          $(".tbody").html(
+            data.map((item) => {
+              const str = JSON.stringify(item);
+              return `<tr>
                     <td>${item.xsxm}</td>
                     <td>${item.xsbh}</td>
                     <td>${item.csjm}</td>
@@ -412,11 +427,64 @@
                       <button class="btn btn-danger btn-sm" onclick="doDel('${item.xsxm}', '${item.xsbh}')">删除</button>
                     </td>
                   </tr>`;
-                })
-              );
-            }
-          },
-        });
+            })
+          );
+        }
+      }
+
+      function getData(params) {
+        console.log(params);
+        if (params) {
+          $.ajax({
+            method: "get",
+            url: `${serverUrl}/index.php`,
+            data: {
+              type: "admin",
+              lx: "sea",
+              key: params,
+            },
+            success: (res) => {
+              renderBody(res);
+            },
+          });
+        } else {
+          $.ajax({
+            method: "get",
+            url: `${serverUrl}/index.php`,
+            data: {
+              type: "admin",
+              lx: "list",
+            },
+            success: (res) => {
+              renderBody(res);
+            },
+          });
+        }
+      }
+
+      function onSearch() {
+        getData($("#key").val());
+      }
+
+      function onAllDel() {
+        layer.confirm(
+          "数据宝贵，谨慎删除！",
+          { icon: 3, title: "全部删除？" },
+          function (index) {
+            $.ajax({
+              url: `${serverUrl}/index.php`,
+              data: {
+                type: "admin",
+                lx: "delall",
+              },
+              method: "get",
+              success: (data) => {
+                layer.close(index);
+                getData();
+              },
+            });
+          }
+        );
       }
 
       function doEdit(editKey, data) {
@@ -432,7 +500,6 @@
       }
 
       function doDel(xsxm, xsbh) {
-        console.log(xsxm, xsbh)
         $.ajax({
           url: `${serverUrl}/index.php`,
           data: {
@@ -473,12 +540,15 @@
           },
         });
       }
+
       function onMul() {
         $("#fileModal").modal("show");
       }
+
       function onUpload() {
         $("#fileModal").modal("hide");
       }
+
       $(() => {
         getData();
       });

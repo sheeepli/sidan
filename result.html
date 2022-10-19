@@ -11,68 +11,70 @@
   </head>
 
   <body>
-    <div class="content">
-      <div class="bg">
-        <img src="./img/圆弧底图.png" alt="" width="100%" />
-      </div>
-      <div class="header">
-        <div class="game-name">2022-2023赛季 PDE国际舞蹈大赛</div>
-        <div class="title">选手信息查询</div>
-      </div>
-
-      <div class="searchBox">
-        <div class="search-result-item">
-          <span class="label">选手姓名：</span>
-          <span class="value" id="xsxm"></span>
+    <div class="content" style="display: flex; flex-direction: column">
+      <div style="flex: 1">
+        <div class="bg">
+          <img src="./img/圆弧底图.png" alt="" width="100%" />
         </div>
-        <div class="search-result-item">
-          <span class="label">选手编号：</span>
-          <span class="value" id="xsbh"></span>
-        </div>
-        <div class="search-result-item">
-          <span class="label">参赛剧目：</span>
-          <span class="value" id="csjm"></span>
-        </div>
-        <div class="search-result-item">
-          <span class="label">所在组别：</span>
-          <span class="value" id="szzb"></span>
-        </div>
-        <div class="search-result-item">
-          <span class="label">选送机构：</span>
-          <span class="value" id="xsjg"></span>
-        </div>
-      </div>
-
-      <div class="tips">
-        <div>
-          <span class="label">所获奖项</span>
-          <span class="value" id="shjx"></span>
+        <div class="header">
+          <div class="game-name">2022-2023赛季 PDE国际舞蹈大赛</div>
+          <div class="title">选手信息查询</div>
         </div>
 
-        <div id="jj">
-          <span class="label">是否晋级</span>
-          <span class="value" id="sfjj"></span>
-        </div>
-      </div>
-
-      <div class="score-box">
-        <div class="title">PDE国际舞蹈大赛所获成绩</div>
-        <div class="score-list">
-          <div class="score-item">
-            <div class="score" id="wcfs"></div>
-            <div class="score-name">作品完成度分数</div>
+        <div class="searchBox">
+          <div class="search-result-item">
+            <span class="label">选手姓名：</span>
+            <span class="value" id="xsxm"></span>
           </div>
-          <div class="score-item">
-            <div class="score" id="bxfs"></div>
-            <div class="score-name">艺术表现力分数</div>
+          <div class="search-result-item">
+            <span class="label">选手编号：</span>
+            <span class="value" id="xsbh"></span>
           </div>
-          <div class="score-item">
-            <div class="score" id="zfs"></div>
-            <div class="score-name">总分</div>
+          <div class="search-result-item">
+            <span class="label">参赛剧目：</span>
+            <span class="value" id="csjm"></span>
+          </div>
+          <div class="search-result-item">
+            <span class="label">所在组别：</span>
+            <span class="value" id="szzb"></span>
+          </div>
+          <div class="search-result-item">
+            <span class="label">选送机构：</span>
+            <span class="value" id="xsjg"></span>
           </div>
         </div>
-        <div class="desc">
-          注：评委将按两个主要评分标准进行综合打分，其一为作品完成度，其二为艺术表现力。作品完成度主要评估选手动作的完成质量及技术技巧的完成质量，艺术表现力则综合考量选手动作是否贴合音乐的旋律和节奏、是否精确表达了作品中人物的情感。
+
+        <div class="tips">
+          <div>
+            <span class="label">所获奖项</span>
+            <span class="value" id="shjx"></span>
+          </div>
+
+          <div id="jj">
+            <span class="label">是否晋级</span>
+            <span class="value" id="sfjj"></span>
+          </div>
+        </div>
+
+        <div class="score-box">
+          <div class="title">PDE国际舞蹈大赛所获成绩</div>
+          <div class="score-list">
+            <div class="score-item">
+              <div class="score" id="wcfs"></div>
+              <div class="score-name">作品完成度分数</div>
+            </div>
+            <div class="score-item">
+              <div class="score" id="bxfs"></div>
+              <div class="score-name">艺术表现力分数</div>
+            </div>
+            <div class="score-item">
+              <div class="score" id="zfs"></div>
+              <div class="score-name">总分</div>
+            </div>
+          </div>
+          <div class="desc">
+            注：评委将按两个主要评分标准进行综合打分，其一为作品完成度，其二为艺术表现力。作品完成度主要评估选手动作的完成质量及技术技巧的完成质量，艺术表现力则综合考量选手动作是否贴合音乐的旋律和节奏、是否精确表达了作品中人物的情感。
+          </div>
         </div>
       </div>
 
@@ -90,16 +92,16 @@
 
         $.get(`${serverUrl}/index.php${search}`, (data) => {
           if (data.code != "1") {
-            alert(data.msg)
+            alert(data.msg);
             return history.go(-1);
           }
-          if (data.msg.sfjj !== '是') {
-            $('#jj').css('display', 'none')
+          if (!["是", "否"].includes(data.msg.sfjj)) {
+            $("#jj").css("display", "none");
           }
           Object.entries(data.msg).forEach((item) => {
             $(`#${item[0]}`).text(item[1]);
           });
-          $('.content').css('opacity', 1)
+          $(".content").css("opacity", 1);
         });
       });
     </script>

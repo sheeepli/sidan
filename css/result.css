@@ -36,7 +36,7 @@
   margin: 0 20px;
   padding: 16px;
   border-radius: 20px;
-  box-shadow: #eee 0 0 20px;
+  box-shadow: #ccc 0 0 20px;
   color: #535a6c;
 }
 
@@ -79,10 +79,10 @@
 .tips {
   background: #fff;
   padding: 10px;
-  box-shadow: #eee 0 0 20px;
+  box-shadow: #ccc 0 0 20px;
   color: #2f3b4b;
   font-size: 14px;
-  margin: 20px 0;
+  margin: 30px 0;
   display: flex;
   justify-content: space-around;
 }
@@ -111,7 +111,7 @@ footer div img {
 .score-box {
   background: #fff;
   padding: 20px;
-  box-shadow: #eee 0 0 20px;
+  box-shadow: #ccc 0 0 20px;
   color: #2f3b4b;
 }
 
@@ -143,4 +143,8 @@ footer div img {
 
 .score-box .desc {
   font-size: 12px;
+}
+
+.desc {
+  font-size: 10px;
 }
