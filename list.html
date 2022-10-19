@@ -40,20 +40,7 @@
         <tbody class="tbody"></tbody>
       </table>
       <!-- <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-end">
-          <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
+        <ul class="pagination justify-content-end"><li class="page-item">  <a class="page-link" href="#" aria-label="Previous">    <span aria-hidden="true">&laquo;</span>  </a></li><li class="page-item"><a class="page-link" href="#">1</a></li><li class="page-item"><a class="page-link" href="#">2</a></li><li class="page-item"><a class="page-link" href="#">3</a></li><li class="page-item">  <a class="page-link" href="#" aria-label="Next">    <span aria-hidden="true">&raquo;</span>  </a></li>
         </ul>
       </nav> -->
     </div>
@@ -372,10 +359,11 @@
               type="button"
               class="btn btn-secondary"
               data-bs-dismiss="modal"
+              onclick="onUpload()"
             >
               取消
             </button>
-            <button type="button" class="btn btn-primary" onclick="onUpload()">
+            <button type="button" class="btn btn-primary" id="uploadBtn">
               确认
             </button>
           </div>
@@ -390,7 +378,6 @@
     <script src="./js/config.js"></script>
     <script>
       function getData() {
-        console.log(123);
         $.ajax({
           method: "get",
           url: `${serverUrl}/index.php`,
@@ -460,14 +447,9 @@
 
       function onAdd() {
         const values = getParameter($(".form-control-add"));
-        console.log(values);
         $.ajax({
           url: `${serverUrl}/index.php`,
-          data: {
-            type: "admin",
-            lx: "add",
-            ...values,
-          },
+          data: { type: "admin", lx: "add", ...values },
           method: "post",
           success: (data) => {
             $("#addModal").modal("hide");
@@ -478,18 +460,12 @@
 
       function onMod() {
         const values = getParameter($(".form-control-mod"));
-        console.log(values);
         $.ajax({
           url: `${serverUrl}/index.php`,
-          data: {
-            type: "admin",
-            lx: "mod",
-            ...values,
-          },
+          data: { type: "admin", lx: "mod", ...values },
           method: "post",
           success: (data) => {
             $("#modModal").modal("hide");
-
             getData();
           },
         });
@@ -497,7 +473,9 @@
       function onMul() {
         $("#fileModal").modal("show");
       }
-      function onUpload() {}
+      function onUpload() {
+        $("#fileModal").modal("hide");
+      }
       $(() => {
         getData();
       });
@@ -508,17 +486,23 @@
         var upload = layui.upload;
         upload.render({
           elem: "#fileUpload",
-          accept: 'file',
-          // url: "https://httpbin.org/post", //此处用的是第三方的 http 请求演示，实际使用时改成您自己的上传接口即可。
+          accept: "file",
+          exts: "xlsx",
+          url: `${serverUrl}/index.php`,
           auto: false,
+          bindAction: "#uploadBtn",
+          data: { lx: "upload", type: "admin" },
+          error: function (res) {
+            return false;
+          },
           done: function (res) {
-            layer.msg("上传成功");
-            layui
-              .$("#uploadDemoView")
-              .removeClass("layui-hide")
-              .find("img")
-              .attr("src", res.files.file);
-            console.log(res);
+            if (res.code == 1) {
+              layer.msg("上传成功");
+              $("#fileModal").modal("hide");
+              getData();
+            } else {
+              layer.msg("上传失败，请重新上传或检查文件内容");
+            }
           },
         });
       });
