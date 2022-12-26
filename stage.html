@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>查询结果</title>
+    <link rel="stylesheet" href="./bootstrap/index.css" />
+    <link rel="stylesheet" href="./css/stage.css" />
+    <script src="./js/isMobile.js"></script>
+  </head>
+
+  <body>
+    <div class="content" style="display: flex; flex-direction: column">
+      <div>
+        <div class="bg">
+          <img src="./img/圆弧底图.png" alt="" width="100%" />
+        </div>
+        <div class="header">
+          <div class="game-name">2022-2023赛季 PDE国际舞蹈大赛</div>
+          <div class="title">决赛选手信息查询及出场顺序抽取</div>
+        </div>
+
+        <div class="searchBox">
+          <div class="search-result-item">
+            <span class="label">选手姓名：</span>
+            <span class="value" id="xsxm"></span>
+          </div>
+          <div class="search-result-item">
+            <span class="label">选手编号：</span>
+            <span class="value" id="xsbh"></span>
+          </div>
+          <div class="search-result-inline">
+            <div class="search-result-item">
+              <span class="label">舞&ensp;&ensp;&ensp;&ensp;种：</span>
+              <span class="value" id="wz"></span>
+            </div>
+            <div class="search-result-item">
+              <span class="label">所在赛场：</span>
+              <span class="value" id="sc"></span>
+            </div>
+          </div>
+          <div class="search-result-inline">
+            <div class="search-result-item">
+              <span class="label">组&ensp;&ensp;&ensp;&ensp;别：</span>
+              <span class="value" id="zb"></span>
+            </div>
+            <div class="search-result-item">
+              <span class="label">舞蹈形式：</span>
+              <span class="value" id="wdxs"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="searchBox">
+          <div class="search-result-item">
+            <span class="label">参赛剧目：</span>
+            <span class="value" id="jmmc"></span>
+          </div>
+          <div class="search-result-inline">
+            <div class="search-result-item">
+              <span class="label">作品时长：</span>
+              <span class="value" id="zpsc"></span>
+            </div>
+            <div class="search-result-item">
+              <span class="label">是否原创：</span>
+              <span class="value" id="sfyc"></span>
+            </div>
+          </div>
+          <div class="search-result-item">
+            <span class="label">备&ensp;&ensp;&ensp;&ensp;注：</span>
+            <span class="value" id="bz"></span>
+          </div>
+        </div>
+
+        <div class="searchBox">
+          <div class="search-result-item">
+            <span class="label">选送机构：</span>
+            <span class="value" id="jgmc"></span>
+          </div>
+          <div class="search-result-item">
+            <span class="label">指导老师：</span>
+            <span class="value" id="zdls"></span>
+          </div>
+        </div>
+
+        <div class="sort">
+          <div class="title">抽取出场顺序</div>
+          <div class="numbers">
+            <div class="number unknown">?</div>
+            <div class="number unknown">?</div>
+            <div class="number unknown">?</div>
+          </div>
+          <div class="button-group">
+            <div class="button cancel">取消</div>
+            <div class="button submit">确定</div>
+          </div>
+
+          <div class="tips" id="timeLimit">
+            <div class="tip" style="text-align: left">
+              请在<span>60</span>秒内选中出场顺序，否则默认选中第一个
+            </div>
+          </div>
+        </div>
+
+        <div class="sorted">
+          <div class="title">出场顺序</div>
+          <div class="numbers">
+            <div id="cjz" class="number"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tips">
+        <div class="tip">
+          <span>*</span
+          >请选手在三个选择项中进行选择，选择数字号码随机生成，所选出的数字即为参赛剧目登场顺序，不可更改；
+        </div>
+        <div class="tip">
+          <span>*</span>双人舞、群舞选手共用一个出场次序，不可重复抽取；
+        </div>
+        <div class="tip">
+          <span>*</span>预期未进行抽签的剧目，视为服从组委会出场顺序安排；
+        </div>
+      </div>
+
+      <footer>
+        <div>
+          <img src="./img/图层 1.png" alt="" width="100%" />
+        </div>
+      </footer>
+    </div>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="./js/config.js"></script>
+    <script>
+      function selected(number) {
+        const search = new URLSearchParams(location.search);
+        $.ajax({
+          method: "post",
+          url: "http://pde.pdedance.cn/2022sort/index.php",
+          data: {
+            type: "index",
+            lx: "xuan",
+            xsbh: search.get("xsbh"),
+            jmmc: search.get("jmmc"),
+            num: number,
+          },
+          success(data) {
+            if (data.code == 1) {
+              $(".sort").css("display", "none");
+              $(".sorted").css("display", "block");
+              $("#cjz").text(number);
+            } else if (data.code === 2) {
+              // alert("手慢了，已为您刷新号码");
+              $(".number.active").text(data.msg);
+              selected(data.msg);
+            }
+          },
+        });
+      }
+      $(() => {
+        let timeLimitId = null;
+        let time = 59;
+        const search = new URLSearchParams(location.search);
+        $.ajax({
+          method: "post",
+          url: "http://pde.pdedance.cn/2022sort/index.php",
+          data: {
+            type: "index",
+            lx: "cha",
+            xsbh: search.get("xsbh"),
+            jmmc: search.get("jmmc"),
+          },
+          success(data) {
+            if (data.code === 1) {
+              Object.entries(data.msg).forEach((item) => {
+                $(`#${item[0]}`).text(item[1]);
+              });
+              if (data.msg.cjz === "?") {
+                $(".sort").css("display", "block");
+                $(".sorted").css("display", "none");
+              } else {
+                $(".sort").css("display", "none");
+                $(".sorted").css("display", "block");
+              }
+              $(".content").css("opacity", 1);
+            }
+          },
+        });
+
+        $(".unknown").click(function () {
+          if (!$(this).hasClass("unknown")) return;
+          // 删除类名
+          let intervalId = [];
+          for (let i = 0; i < $(".number").length; i++) {
+            const element = $(".number")[i];
+            const id = setInterval(() => {
+              element.innerText = Math.floor(Math.random() * 999);
+            }, 0);
+            intervalId.push(id);
+          }
+          $.ajax({
+            method: "post",
+            url: "http://pde.pdedance.cn/2022sort/index.php",
+            data: {
+              type: "index",
+              lx: "chou",
+              xsbh: search.get("xsbh"),
+              jmmc: search.get("jmmc"),
+            },
+            success(data) {
+              setTimeout(() => {
+                for (let i = 0; i < $(".number").length; i++) {
+                  const element = $(".number")[i];
+                  element.innerText = data.msg[`j${1 + i}`];
+                }
+                intervalId.forEach((id) => {
+                  clearInterval(id);
+                });
+                $(".number")
+                  .removeClass("unknown")
+                  .siblings()
+                  .removeClass("unknown");
+                $("#timeLimit").css("display", "block");
+                timeLimitId = setInterval(function () {
+                  $("#timeLimit span").text(time);
+                  time--;
+                  if (time === 0) {
+                    $("#timeLimit").css("display", "none");
+                    clearInterval(timeLimitId);
+                    let number = $(".number")[0].innerText;
+                    if (number === "暂无") {
+                      let number = $(".number")[1].innerText;
+                      if (number === "暂无") {
+                        let number = $(".number")[2].innerText;
+                      }
+                    }
+                    selected(number);
+                  }
+                }, 1000);
+              }, 500);
+            },
+          });
+        });
+
+        $(".number").click(function () {
+          if (!$(this).hasClass("unknown") && $(this).text() !== "暂无") {
+            $(this).addClass("active").siblings().removeClass("active");
+          }
+        });
+
+        $(".submit").click(function () {
+          const less = $(".number.active").length;
+          if (less === 0) {
+            const c = alert(`暂未选中`);
+          } else {
+            const number = $(".number.active").text();
+            selected(number);
+          }
+        });
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        document.getElementsByTagName("html")[0].style.fontSize =
+          (document.documentElement.clientWidth / 1080) * 100 + "px";
+      });
+
+      window.onresize = function () {
+        document.getElementsByTagName("html")[0].style.fontSize =
+          (document.documentElement.clientWidth / 1080) * 100 + "px";
+      };
+    </script>
+    <script src="./bootstrap/index.js"></script>
+  </body>
+</html>

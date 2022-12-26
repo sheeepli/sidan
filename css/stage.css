@@ -1,0 +1,181 @@
+.bg {
+  /* background: url('../img/圆弧底图.png'); */
+  /* background: linear-gradient(to right, #a5bbe6, #6c98e9); */
+  height: 4.63rem;
+  text-align: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.content {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  /* background: #f9f9f9; */
+  opacity: 0;
+}
+
+.header {
+  text-align: center;
+  color: #fff;
+  padding: 1.2rem 0 .8rem
+}
+
+.game-name {
+  font-size: .4rem;
+}
+
+.title {
+  font-size: .48rem;
+  font-weight: 600;
+}
+
+.searchBox {
+  background: #fff;
+  margin: 0 .4rem .3rem;
+  padding: .5rem;
+  border-radius: .48rem;
+  box-shadow: rgba(0, 0, 0, 10%) 0 0 .1rem;
+  color: #535a6c;
+}
+
+.searchBox > div {
+  font-size: .37rem;
+  margin-bottom: .35rem;
+  line-height: 1;
+}
+.searchBox > div:last-child {
+  margin-bottom: 0;
+}
+
+.search-result-inline {
+  display: flex;
+  justify-content: space-around;
+}
+
+.search-result-inline .search-result-item {
+  width: 50%;
+}
+
+.search-result-item:last-child {
+  margin-bottom: 0px;
+}
+
+
+.sort .title {
+  font-size: .5rem;
+  color: #505050;
+}
+
+.sort {
+  background: #fff;
+  margin: .5rem 0 .4rem;
+  padding: .5rem 0;
+  box-shadow: rgba(0, 0, 0, 10%) 0 0 .1rem;
+  text-align: center;
+}
+
+.sort .title, .sorted .title {
+  letter-spacing: 4px;
+}
+
+.sort .numbers {
+  display: flex;
+  justify-content: space-evenly;
+  margin: .7rem 0;
+}
+
+.sort .numbers .number.unknown {
+  font-size: .8rem;
+}
+
+.sort .numbers .number {
+  border: 1px solid #769de8;
+  border-radius: .2rem;
+  font-size: .6rem;
+  color: #769de8;
+  box-shadow: rgba(0, 0, 0, 10%) 0 0 .1rem;
+  height: 1.5rem;
+  width: 2.7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sort .numbers .number.active {
+  background: #769de8;
+  color: #fff;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0 20px;
+  margin-bottom: 20px;
+}
+
+.button-group .button {
+  width: 3.4rem;
+  padding: 8px 0;
+  border-radius: .4rem;
+  height: .8rem;
+  font-size: .48rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-group .cancel {
+  border: 1px solid #c3d2e6;
+  color: #c3d2e6;
+}
+
+.button-group .submit {
+  border: 1px solid #6a98e6;
+  background: #6a98e6;
+  color: #fff;
+}
+
+.tips {
+  font-size: 12px;
+  padding: 0 .8rem;
+}
+
+.tips span {
+  color: red;
+}
+
+footer {
+  padding: 24px;
+}
+
+footer div {
+  width: 66%;
+  margin: 0 auto;
+}
+
+footer div img {
+  display: block;
+}
+
+.sorted {
+  background: #fff;
+  margin: .5rem 0 .6rem;
+  padding: .5rem 0 .8rem ;
+  box-shadow: rgba(0, 0, 0, 10%) 0 0 .1rem;
+  text-align: center;
+}
+
+.sorted .number {
+  margin-top: .8rem;
+  font-size: 1.21;
+  color: #6b97e9;
+  font-weight: bold;
+  line-height: 1;
+}
+
+#timeLimit {
+  display: none;
+}

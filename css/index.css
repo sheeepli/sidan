@@ -1,8 +1,8 @@
 .bg {
   background: linear-gradient(to right, #a5bbe6, #6c98e9);
-  height: 200px;
+  height: 5.1rem;
   text-align: center;
-  padding-top: 40px;
+  padding-top: 1.2rem;
 }
 
 .content {
@@ -12,43 +12,66 @@
 
 .searchBox {
   background: #fff;
-  margin: -40px 20px 60px;
-  padding: 32px;
-  border-radius: 20px;
-  box-shadow: #999 0 0 20px;
+  margin: -0.9rem 0.5rem 1.8rem;
+  padding: .8rem .45rem;
+  border-radius: 0.4rem;
+  box-shadow: #999 0 0 0.2rem;
 }
 
 .searchBox .row {
   --bs-gutter-x: 0;
   --bs-gutter-y: 4;
+  margin-bottom: 0.3rem;
+}
+
+.searchBox .row.submit-button {
+  margin-bottom: 0;
+}
+
+form.row {
+  margin-bottom: 0 !important;
 }
 
 .searchBox .btn-custom {
   background: #6b97e9 !important;
   color: #fff !important;
-  font-size: 16px;
-  margin-top: 30px;
+  font-size: 0.48rem;
+  margin-top: 0.6rem;
+  height: 1.2rem;
+  line-height: 0;
 }
 
 .searchBox .title {
-  font-size: 18px;
+  font-size: 0.5rem;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 0.3rem;
   font-weight: 500;
   color: #505050;
 }
 
 .searchBox .line {
-  width: 30px;
-  height: 4px;
+  width: 0.9rem;
+  height: 0.1rem;
   background-color: #007aff;
   margin: 0 auto;
-  margin-bottom: 30px;
-  border-radius: 2px;
+  margin-bottom: 0.3rem;
+  border-radius: 0.05rem;
 }
 
 .qrcode {
   text-align: center;
+  font-size: 0.38rem;
+}
+
+.qrcode .qr {
+  height: 3.6rem;
+  width: 3.6rem;
+  margin: 0 auto;
+}
+.qrcode .qr img {
+  height: 3.6rem;
+  width: 3.6rem;
+  display: block;
 }
 
 .searchBox .form-control {
@@ -61,5 +84,18 @@
 
 .holder {
   color: #959595;
-  font-size: 12px;
+  font-size: 0.3rem;
+}
+
+.tips {
+  font-size: 0.3rem;
+  padding: 0 0.1rem;
+}
+
+.tips span {
+  color: red;
+}
+.form-control {
+  font-size: 0.4rem;
+  padding: 0.3rem 0.1rem;
 }

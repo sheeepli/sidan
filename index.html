@@ -16,15 +16,15 @@
         <img src="./img/大赛logo.png" alt="" width="120" />
       </div>
       <div class="searchBox">
-        <div class="title">选手信息及成绩查询</div>
+        <div class="title">决赛选手信息查询即出场顺序抽取</div>
         <div class="line"></div>
         <form
           class="row needs-validation"
-          action="/result.html"
+          action="/stage.html"
           id="formId"
           onsubmit="return onSubmit();"
         >
-          <div class="row mb-3">
+          <div class="row">
             <input
               type="text"
               class="form-control"
@@ -34,29 +34,60 @@
               required
             />
           </div>
-          <div class="row mb-3">
+          <div class="row">
             <input type="text" value="index" hidden id="type" name="type" />
             <input
               type="text"
               class="form-control"
-              id="xsxm"
-              name="xsxm"
-              placeholder="请输入选手姓名"
+              id="jmmc"
+              name="jmmc"
+              placeholder="请输入剧目名称"
               required
             />
           </div>
-          <div class="row mb-3">
+          <div class="tips">
+            <span>*</span>注：如忘记或出现错误请练习工作人员
+          </div>
+          <div class="row submit-button">
             <button type="submit" class="btn btn-custom">查询</button>
           </div>
         </form>
       </div>
       <div class="qrcode">
         <div class="qr">
-          <img src="./img/公众号.png" alt="" height="140" />
+          <img src="./img/公众号.png" alt=""/>
         </div>
         <div class="holder">长按二维码关注</div>
         <div class="holder">“PDE国际舞蹈大赛”</div>
       </div>
     </div>
   </body>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementsByTagName("html")[0].style.fontSize =
+        (document.documentElement.clientWidth / 1080) * 100 + "px";
+    });
+
+    window.onresize = function () {
+      document.getElementsByTagName("html")[0].style.fontSize =
+        (document.documentElement.clientWidth / 1080) * 100 + "px";
+    };
+    // function onSubmit() {
+    //   const xsbh = $("input[name=xsbh]").val();
+    //   const jmmc = $("input[name=jmmc]").val();
+    //   $.ajax({
+    //     url: `http://pde.pdedance.cn/2022sort/index.php/`,
+    //     data: {
+    //       type: 'index',
+    //       lx: 'cha',
+    //       xsbh,
+    //       jmmc
+    //     },
+    //     success(data) {
+    //       console.log(data)
+    //     }
+    //   })
+    //   return false
+    // }
+  </script>
 </html>
