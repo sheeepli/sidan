@@ -18,12 +18,10 @@
       <div class="searchBox">
         <div class="title">决赛选手信息查询即出场顺序抽取</div>
         <div class="line"></div>
-        <form
-          class="row needs-validation"
-          action="/stage.html"
-          id="formId"
-          onsubmit="return onSubmit();"
-        >
+        <!-- action="/stage.html" -->
+        <!-- onsubmit="return onSubmit();"
+        target="testFrame" -->
+        <form class="row needs-validation" id="formId">
           <div class="row">
             <input
               type="text"
@@ -36,6 +34,7 @@
           </div>
           <div class="row">
             <input type="text" value="index" hidden id="type" name="type" />
+            <input type="text" value="cha" hidden id="lx" name="lx" />
             <input
               type="text"
               class="form-control"
@@ -48,20 +47,21 @@
           <div class="tips">
             <span>*</span>注：如忘记或出现错误请练习工作人员
           </div>
-          <div class="row submit-button">
-            <button type="submit" class="btn btn-custom">查询</button>
-          </div>
         </form>
+        <div class="row submit-button">
+          <button class="btn btn-custom">查询</button>
+        </div>
       </div>
       <div class="qrcode">
         <div class="qr">
-          <img src="./img/公众号.png" alt=""/>
+          <img src="./img/公众号.png" alt="" />
         </div>
         <div class="holder">长按二维码关注</div>
         <div class="holder">“PDE国际舞蹈大赛”</div>
       </div>
     </div>
   </body>
+  <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       document.getElementsByTagName("html")[0].style.fontSize =
@@ -72,22 +72,23 @@
       document.getElementsByTagName("html")[0].style.fontSize =
         (document.documentElement.clientWidth / 1080) * 100 + "px";
     };
-    // function onSubmit() {
-    //   const xsbh = $("input[name=xsbh]").val();
-    //   const jmmc = $("input[name=jmmc]").val();
-    //   $.ajax({
-    //     url: `http://pde.pdedance.cn/2022sort/index.php/`,
-    //     data: {
-    //       type: 'index',
-    //       lx: 'cha',
-    //       xsbh,
-    //       jmmc
-    //     },
-    //     success(data) {
-    //       console.log(data)
-    //     }
-    //   })
-    //   return false
-    // }
+    $(".btn").click(function () {
+      const val = $("#formId").serializeArray();
+      $.ajax({
+        url: `http://pde.pdedance.cn/2022sort/index.php/`,
+        data: val.reduce((acc, item) => {
+          acc[item.name] = item.value;
+          return acc;
+        }, {}),
+        success(data) {
+          if (data.code === 0) {
+            alert(data.msg);
+          } else {
+            const val = $("#formId").serialize();
+            location.href = "/stage.html?" + val;
+          }
+        },
+      });
+    });
   </script>
 </html>
