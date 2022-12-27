@@ -53,16 +53,16 @@
       <table class="table table-hover table-striped table-bordered">
         <thead>
           <tr>
-            <th scope="col">选手姓名</th>
-            <th scope="col">选手编号</th>
-            <th scope="col" style="width: 250px">参赛节目</th>
-            <th scope="col">所在组别</th>
-            <th scope="col">选送机构</th>
-            <th scope="col">所获奖项</th>
-            <th scope="col">是否晋级</th>
-            <th scope="col">作品完成度分数</th>
-            <th scope="col">艺术表现力分数</th>
-            <th scope="col">总分</th>
+            <th scope="col">名称（机构名称|个人参赛）</th>
+            <th scope="col">姓名</th>
+            <th scope="col">选手号</th>
+            <th scope="col">舞种</th>
+            <th scope="col">作品时长</th>
+            <th scope="col">是否原创</th>
+            <th scope="col">指导老师</th>
+            <th scope="col">赛场</th>
+            <th scope="col">抽奖值</th>
+            <th scope="col">备注</th>
             <th scope="col" style="width: 130px">操作</th>
           </tr>
         </thead>
@@ -91,85 +91,79 @@
           <div class="modal-body">
             <form class="row" id="formId">
               <div class="mb-3 row">
-                <label for="xsxm" class="col-sm-4 col-form-label"
-                  >选手姓名</label
+                <label for="jgmc" class="col-sm-6 col-form-label"
+                  >名称（机构名称|个人参赛）</label
                 >
-                <div class="col-sm-8">
-                  <input
-                    type="text"
-                    class="form-control form-control-add"
-                    name="xsxm"
-                  />
+                <div class="col-sm-6">
+                  <input class="form-control form-control-add" name="jgmc" />
                 </div>
               </div>
               <div class="mb-3 row">
-                <label for="xsbh" class="col-sm-4 col-form-label"
-                  >选手编号</label
-                >
-                <div class="col-sm-8">
+                <label for="xsxm" class="col-sm-6 col-form-label">姓名</label>
+                <div class="col-sm-6">
+                  <input class="form-control form-control-add" name="xsxm" />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="xsbh" class="col-sm-6 col-form-label">选手号</label>
+                <div class="col-sm-6">
                   <input class="form-control form-control-add" name="xsbh" />
                 </div>
               </div>
               <div class="mb-3 row">
-                <label for="csjm" class="col-sm-4 col-form-label"
-                  >参赛节目</label
-                >
-                <div class="col-sm-8">
-                  <input class="form-control form-control-add" name="csjm" />
+                <label for="wz" class="col-sm-6 col-form-label">舞种</label>
+                <div class="col-sm-6">
+                  <input class="form-control form-control-add" name="wz" />
                 </div>
               </div>
               <div class="mb-3 row">
-                <label for="szzb" class="col-sm-4 col-form-label"
-                  >所在组别</label
+                <label for="jmmc" class="col-sm-6 col-form-label"
+                  >剧目名称</label
                 >
-                <div class="col-sm-8">
-                  <input class="form-control form-control-add" name="szzb" />
+                <div class="col-sm-6">
+                  <input class="form-control form-control-add" name="jmmc" />
                 </div>
               </div>
               <div class="mb-3 row">
-                <label for="xsjg" class="col-sm-4 col-form-label"
-                  >选送机构</label
+                <label for="zpsc" class="col-sm-6 col-form-label"
+                  >作品时长</label
                 >
-                <div class="col-sm-8">
-                  <input class="form-control form-control-add" name="xsjg" />
+                <div class="col-sm-6">
+                  <input class="form-control form-control-add" name="zpsc" />
                 </div>
               </div>
               <div class="mb-3 row">
-                <label for="shjx" class="col-sm-4 col-form-label"
-                  >所获奖项</label
+                <label for="sfyc" class="col-sm-6 col-form-label"
+                  >是否原创</label
                 >
-                <div class="col-sm-8">
-                  <input class="form-control form-control-add" name="shjx" />
+                <div class="col-sm-6">
+                  <input class="form-control form-control-add" name="sfyc" />
                 </div>
               </div>
               <div class="mb-3 row">
-                <label for="sfjj" class="col-sm-4 col-form-label"
-                  >是否晋级</label
+                <label for="zdls" class="col-sm-6 col-form-label"
+                  >指导老师</label
                 >
-                <div class="col-sm-8">
-                  <input class="form-control form-control-add" name="sfjj" />
+                <div class="col-sm-6">
+                  <input class="form-control form-control-add" name="zdls" />
                 </div>
               </div>
               <div class="mb-3 row">
-                <label for="wcfs" class="col-sm-4 col-form-label"
-                  >作品完成度分数</label
-                >
-                <div class="col-sm-8">
-                  <input class="form-control form-control-add" name="wcfs" />
+                <label for="sc" class="col-sm-6 col-form-label">赛场</label>
+                <div class="col-sm-6">
+                  <input class="form-control form-control-add" name="sc" />
                 </div>
               </div>
               <div class="mb-3 row">
-                <label for="bxfs" class="col-sm-4 col-form-label"
-                  >艺术表现力分数</label
-                >
-                <div class="col-sm-8">
-                  <input class="form-control form-control-add" name="bxfs" />
+                <label for="cjz" class="col-sm-6 col-form-label">抽奖值</label>
+                <div class="col-sm-6">
+                  <input class="form-control form-control-add" name="cjz" />
                 </div>
               </div>
               <div class="mb-3 row">
-                <label for="zfs" class="col-sm-4 col-form-label">总分</label>
-                <div class="col-sm-8">
-                  <input class="form-control form-control-add" name="zfs" />
+                <label for="bz" class="col-sm-6 col-form-label">备注</label>
+                <div class="col-sm-6">
+                  <input class="form-control form-control-add" name="bz" />
                 </div>
               </div>
             </form>
@@ -211,12 +205,22 @@
           <div class="modal-body">
             <form class="row" id="formId">
               <div class="mb-3 row">
-                <label for="xsxm" class="col-sm-4 col-form-label"
-                  >选手姓名</label
+                <label for="jgmc" class="col-sm-6 col-form-label"
+                  >名称（机构名称|个人参赛）</label
                 >
-                <div class="col-sm-8">
+                <div class="col-sm-6">
                   <input
                     type="text"
+                    class="form-control form-control-mod"
+                    id="jgmc"
+                    name="jgmc"
+                  />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="xsxm" class="col-sm-6 col-form-label">姓名</label>
+                <div class="col-sm-6">
+                  <input
                     class="form-control form-control-mod"
                     id="xsxm"
                     name="xsxm"
@@ -224,10 +228,8 @@
                 </div>
               </div>
               <div class="mb-3 row">
-                <label for="xsbh" class="col-sm-4 col-form-label"
-                  >选手编号</label
-                >
-                <div class="col-sm-8">
+                <label for="xsbh" class="col-sm-6 col-form-label">选手号</label>
+                <div class="col-sm-6">
                   <input
                     class="form-control form-control-mod"
                     id="xsbh"
@@ -236,96 +238,90 @@
                 </div>
               </div>
               <div class="mb-3 row">
-                <label for="csjm" class="col-sm-4 col-form-label"
-                  >参赛节目</label
-                >
-                <div class="col-sm-8">
+                <label for="wz" class="col-sm-6 col-form-label">舞种</label>
+                <div class="col-sm-6">
                   <input
                     class="form-control form-control-mod"
-                    id="csjm"
-                    name="csjm"
+                    id="wz"
+                    name="wz"
                   />
                 </div>
               </div>
               <div class="mb-3 row">
-                <label for="szzb" class="col-sm-4 col-form-label"
-                  >所在组别</label
+                <label for="jmmc" class="col-sm-6 col-form-label"
+                  >剧目名称</label
                 >
-                <div class="col-sm-8">
+                <div class="col-sm-6">
                   <input
                     class="form-control form-control-mod"
-                    id="szzb"
-                    name="szzb"
+                    id="jmmc"
+                    name="jmmc"
                   />
                 </div>
               </div>
               <div class="mb-3 row">
-                <label for="xsjg" class="col-sm-4 col-form-label"
-                  >选送机构</label
+                <label for="zpsc" class="col-sm-6 col-form-label"
+                  >作品时长</label
                 >
-                <div class="col-sm-8">
+                <div class="col-sm-6">
                   <input
                     class="form-control form-control-mod"
-                    id="xsjg"
-                    name="xsjg"
+                    id="zpsc"
+                    name="zpsc"
                   />
                 </div>
               </div>
               <div class="mb-3 row">
-                <label for="shjx" class="col-sm-4 col-form-label"
-                  >所获奖项</label
+                <label for="sfyc" class="col-sm-6 col-form-label"
+                  >是否原创</label
                 >
-                <div class="col-sm-8">
+                <div class="col-sm-6">
                   <input
                     class="form-control form-control-mod"
-                    id="shjx"
-                    name="shjx"
+                    id="sfyc"
+                    name="sfyc"
                   />
                 </div>
               </div>
               <div class="mb-3 row">
-                <label for="sfjj" class="col-sm-4 col-form-label"
-                  >是否晋级</label
+                <label for="zdls" class="col-sm-6 col-form-label"
+                  >指导老师</label
                 >
-                <div class="col-sm-8">
+                <div class="col-sm-6">
                   <input
                     class="form-control form-control-mod"
-                    id="sfjj"
-                    name="sfjj"
+                    id="zdls"
+                    name="zdls"
                   />
                 </div>
               </div>
               <div class="mb-3 row">
-                <label for="wcfs" class="col-sm-4 col-form-label"
-                  >作品完成度分数</label
-                >
-                <div class="col-sm-8">
+                <label for="sc" class="col-sm-6 col-form-label">赛场</label>
+                <div class="col-sm-6">
                   <input
                     class="form-control form-control-mod"
-                    id="wcfs"
-                    name="wcfs"
+                    id="sc"
+                    name="sc"
                   />
                 </div>
               </div>
               <div class="mb-3 row">
-                <label for="bxfs" class="col-sm-4 col-form-label"
-                  >艺术表现力分数</label
-                >
-                <div class="col-sm-8">
+                <label for="cjz" class="col-sm-6 col-form-label">抽奖值</label>
+                <div class="col-sm-6">
                   <input
                     class="form-control form-control-mod"
-                    id="bxfs"
-                    name="bxfs"
+                    id="cjz"
+                    name="cjz"
                   />
                 </div>
               </div>
               <div class="mb-3 row">
-                <label for="zfs" class="col-sm-4 col-form-label">总分</label>
-                <div class="col-sm-8">
+                <label for="bz" class="col-sm-6 col-form-label">备注</label>
+                <div class="col-sm-6">
                   <input
                     class="form-control form-control-mod"
-                    id="zfs"
-                    name="zfs"
+                    id="bz"
+                    name="bz"
                   />
                 </div>
               </div>
@@ -408,26 +404,25 @@
           );
         } else {
           const data = res.msg;
+          const str = JSON.stringify(data);
           $(".tbody").html(
-            data.map((item) => {
-              const str = JSON.stringify(item);
-              return `<tr>
-                    <td>${item.xsxm}</td>
-                    <td>${item.xsbh}</td>
-                    <td>${item.csjm}</td>
-                    <td>${item.szzb}</td>
-                    <td>${item.xsjg}</td>
-                    <td>${item.shjx}</td>
-                    <td>${item.sfjj}</td>
-                    <td>${item.wcfs}</td>
-                    <td>${item.bxfs}</td>
-                    <td>${item.zfs}</td>
-                    <td>
-                      <button type="button" class="btn btn-primary btn-sm" onclick='doEdit(1, ${str})'>编辑</button>
-                      <button class="btn btn-danger btn-sm" onclick="doDel('${item.xsxm}', '${item.xsbh}')">删除</button>
-                    </td>
-                  </tr>`;
-            })
+            `<tr>
+              <td>${data.jgmc}</td>
+              <td>${data.xsxm}</td>
+              <td>${data.xsbh}</td>
+              <td>${data.wz}</td>
+              <td>${data.jmmc}</td>
+              <td>${data.zpsc}</td>
+              <td>${data.sfyc}</td>
+              <td>${data.zdls}</td>
+              <td>${data.sc}</td>
+              <td>${data.cjz}</td>
+              <td>${data.bz}</td>
+              <td>
+                <button type="button" class="btn btn-primary btn-sm" onclick='doEdit(1, ${str})'>编辑</button>
+                <button class="btn btn-danger btn-sm" onclick="doDel('${data.xsxm}', '${data.xsbh}')">删除</button>
+              </td>
+            </tr>`
           );
         }
       }
@@ -437,20 +432,21 @@
         if (params) {
           $.ajax({
             method: "get",
-            url: `${serverUrl}/index.php`,
+            url: `http://pde.pdedance.cn/2022sort/index.php`,
             data: {
               type: "admin",
-              lx: "sea",
-              key: params,
+              lx: "cha",
+              xsbh: params,
             },
             success: (res) => {
               renderBody(res);
             },
           });
         } else {
+          return false;
           $.ajax({
             method: "get",
-            url: `${serverUrl}/index.php`,
+            url: `http://pde.pdedance.cn/2022sort/index.php`,
             data: {
               type: "admin",
               lx: "list",
@@ -472,7 +468,7 @@
           { icon: 3, title: "全部删除？" },
           function (index) {
             $.ajax({
-              url: `${serverUrl}/index.php`,
+              url: `http://pde.pdedance.cn/2022sort/index.php`,
               data: {
                 type: "admin",
                 lx: "delall",
@@ -480,7 +476,7 @@
               method: "get",
               success: (data) => {
                 layer.close(index);
-                getData();
+                getData($("#key").val());
               },
             });
           }
@@ -501,7 +497,7 @@
 
       function doDel(xsxm, xsbh) {
         $.ajax({
-          url: `${serverUrl}/index.php`,
+          url: `http://pde.pdedance.cn/2022sort/index.php`,
           data: {
             type: "admin",
             lx: "del",
@@ -518,7 +514,7 @@
       function onAdd() {
         const values = getParameter($(".form-control-add"));
         $.ajax({
-          url: `${serverUrl}/index.php`,
+          url: `http://pde.pdedance.cn/2022sort/index.php`,
           data: { type: "admin", lx: "add", ...values },
           method: "post",
           success: (data) => {
@@ -531,7 +527,7 @@
       function onMod() {
         const values = getParameter($(".form-control-mod"));
         $.ajax({
-          url: `${serverUrl}/index.php`,
+          url: `http://pde.pdedance.cn/2022sort/index.php`,
           data: { type: "admin", lx: "mod", ...values },
           method: "post",
           success: (data) => {
@@ -561,7 +557,7 @@
           elem: "#fileUpload",
           accept: "file",
           exts: "xlsx",
-          url: `${serverUrl}/index.php`,
+          url: `http://pde.pdedance.cn/2022sort/index.php`,
           auto: false,
           bindAction: "#uploadBtn",
           data: { lx: "upload", type: "admin" },
