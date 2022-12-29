@@ -70,6 +70,7 @@
       </table>
     </div>
 
+    <!-- 添加 -->
     <div
       class="modal fade"
       id="addModal"
@@ -155,15 +156,15 @@
                 </div>
               </div>
               <div class="mb-3 row">
-                <label for="cjz" class="col-sm-6 col-form-label">抽奖值</label>
-                <div class="col-sm-6">
-                  <input class="form-control form-control-add" name="cjz" />
-                </div>
-              </div>
-              <div class="mb-3 row">
                 <label for="bz" class="col-sm-6 col-form-label">备注</label>
                 <div class="col-sm-6">
                   <input class="form-control form-control-add" name="bz" />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="cjz" class="col-sm-6 col-form-label">抽奖值</label>
+                <div class="col-sm-6">
+                  <input class="form-control form-control-add" name="cjz" />
                 </div>
               </div>
             </form>
@@ -184,6 +185,7 @@
       </div>
     </div>
 
+    <!-- 编辑 -->
     <div
       class="modal fade"
       id="modModal"
@@ -306,22 +308,22 @@
                 </div>
               </div>
               <div class="mb-3 row">
-                <label for="cjz" class="col-sm-6 col-form-label">抽奖值</label>
-                <div class="col-sm-6">
-                  <input
-                    class="form-control form-control-mod"
-                    id="cjz"
-                    name="cjz"
-                  />
-                </div>
-              </div>
-              <div class="mb-3 row">
                 <label for="bz" class="col-sm-6 col-form-label">备注</label>
                 <div class="col-sm-6">
                   <input
                     class="form-control form-control-mod"
                     id="bz"
                     name="bz"
+                  />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="cjz" class="col-sm-6 col-form-label">抽奖值</label>
+                <div class="col-sm-6">
+                  <input
+                    class="form-control form-control-mod"
+                    id="cjz"
+                    name="cjz"
                   />
                 </div>
               </div>
@@ -343,6 +345,7 @@
       </div>
     </div>
 
+    <!-- 批量上传 -->
     <div
       class="modal fade"
       id="fileModal"
@@ -420,7 +423,7 @@
               <td>${data.bz}</td>
               <td>
                 <button type="button" class="btn btn-primary btn-sm" onclick='doEdit(1, ${str})'>编辑</button>
-                <button class="btn btn-danger btn-sm" onclick="doDel('${data.xsxm}', '${data.xsbh}')">删除</button>
+                <button class="btn btn-danger btn-sm" onclick="doDel('${data.xsbh}')">删除</button>
               </td>
             </tr>`
           );
@@ -428,7 +431,6 @@
       }
 
       function getData(params) {
-        console.log(params);
         if (params) {
           $.ajax({
             method: "get",
@@ -495,18 +497,17 @@
         }
       }
 
-      function doDel(xsxm, xsbh) {
+      function doDel( xsbh) {
         $.ajax({
           url: `http://pde.pdedance.cn/2022sort/index.php`,
           data: {
             type: "admin",
-            lx: "del",
-            xsxm,
+            lx: "shan",
             xsbh,
           },
           method: "get",
           success: (data) => {
-            getData();
+            getData($("#key").val());
           },
         });
       }
@@ -519,7 +520,7 @@
           method: "post",
           success: (data) => {
             $("#addModal").modal("hide");
-            getData();
+            getData($("#key").val());
           },
         });
       }
@@ -528,11 +529,11 @@
         const values = getParameter($(".form-control-mod"));
         $.ajax({
           url: `http://pde.pdedance.cn/2022sort/index.php`,
-          data: { type: "admin", lx: "mod", ...values },
+          data: { type: "admin", lx: "gai", ...values },
           method: "post",
           success: (data) => {
             $("#modModal").modal("hide");
-            getData();
+            getData($("#key").val());
           },
         });
       }
@@ -545,9 +546,9 @@
         $("#fileModal").modal("hide");
       }
 
-      $(() => {
-        getData();
-      });
+      // $(() => {
+      //   getData($("#key").val());
+      // });
     </script>
 
     <script>
@@ -568,7 +569,7 @@
             if (res.code == 1) {
               layer.msg(res.msg);
               $("#fileModal").modal("hide");
-              getData();
+              getData($("#key").val());
             } else {
               layer.msg(res.msg);
             }
